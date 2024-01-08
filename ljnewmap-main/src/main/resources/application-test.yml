@@ -1,0 +1,68 @@
+web:
+  files-path: /Users/shutongzhang/Desktop/uploadtest/
+spring:
+  datasource:
+    druid:
+      #postgresql
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: root
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 6000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #Oracle需要打开注释
+      #      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: ljnewmap
+        #达梦数据库，需要注释掉，其他数据库可以打开
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+
+# spring-doc 接口文档
+springdoc:
+  api-docs:
+    enabled: true # 是否启用接口文档
+# 接口文档配置
+knife4j:
+  enable: true
+  #是否生产环境
+  production: false
+  #开启验证
+  basic:
+    enable: true
+    username: admin
+    password: ljnewmap
+  setting:
+    enableFooter: false
+
+##多数据源的配置，需要引用dynamic-datasource模块
+#dynamic:
+#  datasource:
+#    slave1:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://localhost:3308/renren_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+#      username: root
+#      password: 123456
+#    slave2:
+#      driver-class-name: org.postgresql.Driver
+#      url: jdbc:postgresql://123456:5432/renren_security
+#      username: postgres
+#      password: 123456

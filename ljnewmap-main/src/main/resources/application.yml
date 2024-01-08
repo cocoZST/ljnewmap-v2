@@ -1,0 +1,79 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 1000
+      min-spare: 30
+    connection-timeout: 600000ms
+  port: 9650
+  servlet:
+    encoding:
+      force: true
+    context-path: /newmap
+    session:
+      cookie:
+        http-only: true
+
+
+spring:
+  # 环境 dev|test|prod
+  profiles:
+    active: test
+  mvc:
+    throw-exception-if-no-handler-found: true
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  redis:
+    # 是否开启redis缓存  true开启   false关闭
+    open: false
+    database: 0
+    host: 192.168.1.252
+    port: 6379
+    password:    # 密码（默认为空）
+    timeout: 6000ms  # 连接超时时长（毫秒）
+    lettuce:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接
+
+#mybatis
+mybatis-plus:
+  #此处不要缺失classpath*后的星号，多模块扫描会扫不到xml
+  mapper-locations: classpath*:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.ljnewmap.modules.*.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型 ASSIGN_ID: 雪花算法  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: ASSIGN_ID
+    banner: true
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+  configuration-properties:
+    prefix:
+    blobType: BLOB
+    boolValue: TRUE
+
+# 工作流 Flowable 配置
+flowable:
+  # 1. false: 默认值，Flowable 启动时，对比数据库表中保存的版本，如果不匹配。将抛出异常
+  # 2. true: 启动时会对数据库中所有表进行更新操作，如果表存在，不做处理，反之，自动创建表
+  # 3. create_drop: 启动时自动创建表，关闭时自动删除表
+  # 4. drop_create: 启动时，删除旧表，再创建新表
+  database-schema-update: true # 设置为 false，可通过 https://github.com/flowable/flowable-sql 初始化
+  db-history-used: true # flowable6 默认 true 生成信息表，无需手动设置
+  check-process-definitions: false # 设置为 false，禁用 /resources/processes 自动部署 BPMN XML 流程
+  history-level: full # full：保存历史数据的最高级别，可保存全部流程相关细节，包括流程流转各节点参数

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljnewmap.modules.sys.dao.SysUserPostEntityDao">
+  <resultMap id="BaseResultMap" type="com.ljnewmap.modules.sys.entity.SysUserPostEntity">
+    <!--@mbg.generated-->
+    <!--@Table sys_user_post-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, post_id, creator, create_date, updater, update_date, "status"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_post
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sys_user_post
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ljnewmap.modules.sys.entity.SysUserPostEntity">
+    <!--@mbg.generated-->
+    insert into sys_user_post (id, user_id, post_id, 
+      creator, create_date, updater, 
+      update_date, "status")
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT}, 
+      #{creator,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updater,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljnewmap.modules.sys.entity.SysUserPostEntity">
+    <!--@mbg.generated-->
+    insert into sys_user_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="status != null">
+        "status",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljnewmap.modules.sys.entity.SysUserPostEntity">
+    <!--@mbg.generated-->
+    update sys_user_post
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        "status" = #{status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljnewmap.modules.sys.entity.SysUserPostEntity">
+    <!--@mbg.generated-->
+    update sys_user_post
+    set user_id = #{userId,jdbcType=BIGINT},
+      post_id = #{postId,jdbcType=BIGINT},
+      creator = #{creator,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      "status" = #{status,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

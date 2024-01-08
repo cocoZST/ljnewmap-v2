@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljnewmap.modules.sys.dao.SysUserPostDao">
+    <delete id="deleteByPostIds">
+        delete from sys_user_post where post_id in
+        <foreach item="postId" collection="array" open="(" separator="," close=")">
+            #{postId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByUserIds">
+        delete from sys_user_post where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <select id="getUserPostList" resultType="com.ljnewmap.modules.sys.entity.SysUserPostEntity">
+        select user_id,post_id,status from sys_user_post where user_id = #{userId}
+    </select>
+</mapper>
